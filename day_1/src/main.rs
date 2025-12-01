@@ -9,7 +9,7 @@ fn main() {
     // File hosts.txt must exist in the current path
     if let Ok(lines) = read_lines("./input.txt") {
         // Consumes the iterator, returns an (Optional) String
-        let mut position = 0i8;
+        let mut position = 50i8;
         let mut password = 0;
         for line in lines.map_while(Result::ok) {
             let direction = line.chars().nth(0).unwrap();
@@ -19,7 +19,7 @@ fn main() {
 
             for _ in 0..count {
                 position = position.add(increment as i8);
-                if position >= MAX_VALUE {
+                if position > MAX_VALUE {
                     position = 0
                 } else if position < 0 {
                     position = MAX_VALUE
