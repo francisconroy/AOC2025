@@ -1,3 +1,7 @@
+/** Shamelessly copied the read_lines function from the rust by example pages,
+  I'll admit that I did use copilot to complete a few lines for me, namely
+ the one to parse a number from the string. */
+
 use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
