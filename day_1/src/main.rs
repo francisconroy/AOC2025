@@ -1,3 +1,4 @@
+use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::ops::Add;
@@ -6,7 +7,8 @@ use std::path::Path;
 const MAX_VALUE: i8 = 99i8;
 
 fn main() {
-    // File hosts.txt must exist in the current path
+    let part_two = env::var("PART_TWO").is_ok();
+
     if let Ok(lines) = read_lines("./input.txt") {
         // Consumes the iterator, returns an (Optional) String
         let mut position = 50i8;
@@ -19,16 +21,24 @@ fn main() {
 
             for _ in 0..count {
                 position = position.add(increment as i8);
+
                 if position > MAX_VALUE {
                     position = 0
                 } else if position < 0 {
                     position = MAX_VALUE
                 };
+
+                if part_two && position == 0 {
+                    password +=1;
+                }
             }
 
-            if position == 0 {
-                password += 1
-            };
+            if !part_two {
+                if position == 0 {
+                    password += 1
+                };
+            }
+
             println!("{}", password);
         }
     }
