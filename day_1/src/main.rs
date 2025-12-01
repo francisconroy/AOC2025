@@ -20,7 +20,7 @@ fn main() {
             let increment = if direction.eq(&'L') { -1i8 } else { 1i8 };
 
             for _ in 0..count {
-                position = position.add(increment as i8);
+                position = position.add(increment);
 
                 if position > MAX_VALUE {
                     position = 0
