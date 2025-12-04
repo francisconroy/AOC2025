@@ -10,11 +10,9 @@ def count_adjacents_in_subgrid(subgrid: list[list[str]]) -> int:
         for cellidx in range(SUBGRID_SIZE):
             if cellidx == 1 == rowidx:
                 continue  # skip center
-            try:
-                if subgrid[rowidx][cellidx] == '@':
-                    count += 1
-            except Exception:
-                pdb.pm()
+            if subgrid[rowidx][cellidx] == '@':
+                count += 1
+
     return count
 
 
