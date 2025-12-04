@@ -1,16 +1,16 @@
-import pdb
+
 
 SUBGRID_SIZE = 3
 PADDING = 1
 
 
-def count_adjacents_in_subgrid(subgrid: list[list[str]]) -> int:
+def count_adjacents_in_subgrid(grid: list[list[str]], center_row, center_col) -> int:
     count = 0
-    for rowidx in range(SUBGRID_SIZE):
-        for cellidx in range(SUBGRID_SIZE):
-            if cellidx == 1 == rowidx:
+    for rowidx in range(center_row-PADDING, center_row+PADDING+1):
+        for cellidx in range(center_col-PADDING, center_col+PADDING+1):
+            if cellidx == center_col and rowidx == center_row:
                 continue  # skip center
-            if subgrid[rowidx][cellidx] == '@':
+            if grid[rowidx][cellidx] == '@':
                 count += 1
 
     return count
@@ -24,8 +24,8 @@ def extend_grid(grid: list[list[str]]) -> list[list[str]]:
         ogrid.append([""] + row + [""])
 
     # Add top and bottom
-    ogrid.insert(0, [""] * (width + 2))
-    ogrid.append([""] * (width + 2))
+    ogrid.insert(0, [""] * (width + 2*PADDING))
+    ogrid.append([""] * (width + 2*PADDING))
     return ogrid
 
 
@@ -53,12 +53,7 @@ def main():
                 cell = grid[rowidx][cellidx]
                 if cell != '@':
                     continue
-                # extract subgrid
-                subgrid = []
-                for rowoffset in range(-PADDING, PADDING + 1):
-                    subrow = grid[rowidx + rowoffset][cellidx - PADDING:cellidx + PADDING + 1]
-                    subgrid.append(subrow)
-                count = count_adjacents_in_subgrid(subgrid)
+                count = count_adjacents_in_subgrid(grid, rowidx, cellidx)
                 if count < 4:
                     loop_removed_amount += 1
                     total_count += 1
