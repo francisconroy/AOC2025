@@ -2,6 +2,8 @@ import pdb
 
 SUBGRID_SIZE = 3
 PADDING = 1
+
+
 def count_adjacents_in_subgrid(subgrid: list[list[str]]) -> int:
     count = 0
     for rowidx in range(SUBGRID_SIZE):
@@ -15,10 +17,11 @@ def count_adjacents_in_subgrid(subgrid: list[list[str]]) -> int:
                 pdb.pm()
     return count
 
+
 def extend_grid(grid: list[list[str]]) -> list[list[str]]:
     width = len(grid[0])
     # extend lines
-    ogrid= []
+    ogrid = []
     for row in grid:
         ogrid.append([""] + row + [""])
 
@@ -54,19 +57,16 @@ def main():
                     continue
                 # extract subgrid
                 subgrid = []
-                for rowoffset in range(-PADDING, PADDING+1):
-                    subrow = grid[rowidx+rowoffset][cellidx-PADDING:cellidx+PADDING+1]
+                for rowoffset in range(-PADDING, PADDING + 1):
+                    subrow = grid[rowidx + rowoffset][cellidx - PADDING:cellidx + PADDING + 1]
                     subgrid.append(subrow)
                 count = count_adjacents_in_subgrid(subgrid)
-                if count <4:
-                    loop_removed_amount +=1
+                if count < 4:
+                    loop_removed_amount += 1
                     total_count += 1
                     grid[rowidx][cellidx] = "x"
     print(total_count)
 
+
 if __name__ == '__main__':
     main()
-
-
-
-
